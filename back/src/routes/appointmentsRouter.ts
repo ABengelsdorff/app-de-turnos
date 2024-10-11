@@ -17,7 +17,7 @@ router.get("/:id", getAppointmentById)
 //!crear turno/ Registro de un nuevo turno.
 router.post("/schedule", registerAppointment)
 
-
+//!cancelar turno.
 router.put("/cancel/:id", cancelAppointment)
 
 export default router

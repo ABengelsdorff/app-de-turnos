@@ -1,54 +1,60 @@
-import AppointmentDto from "../dto/AppointmentDto";
+import { AppointmentDto } from "../dto/AppointmentDto";
 import { AppointmentStatus } from "../enums/AppointmentStatus";
-import IAppointment from "../interfaces/IAppoitments";
-
-const appointmentsDB: IAppointment[] = []
-
-let id: number = 1
-
+import { Appointment } from"../entities/Appointment";
+import { AppointmentModel, UserModel } from "../config/data-source";
 //-------------------------------------------------------------
 
-const getAppointmentService = async ():Promise<IAppointment[]> => {
-    return appointmentsDB
+const getAppointmentService = async ():Promise<Appointment[]> => {
+
+    const allAppointments = await AppointmentModel.find({
+        relations : { user: true }
+    })
+
+    return allAppointments
 }
 
 //-------------------------------------------------------------   
 
-const getAppointmentByIdService = async (id: number): Promise<IAppointment | undefined> => {
-    const foundApp = appointmentsDB.find(appointment => appointment.id === id);
+const getAppointmentByIdService = async (id: number): Promise<Appointment | null> => {
+    const foundApp = await AppointmentModel.findOne({
+        where: { id },
+        relations: ["user"]
+    });
     return foundApp;
 }
 
 //-------------------------------------------------------------  
 
 
-const createAppointmentService = async (appointmentsData: AppointmentDto):Promise<IAppointment | undefined> => {
+const createAppointmentService = async (appointmentsData: AppointmentDto):Promise<Appointment | null> => {
 
     const { date, time, userId } = appointmentsData;
 
-    //const foundUser = usersDB.find((user) => user.id === id)
+    const userEntity = await UserModel.findOneBy({id:userId})
 
-    //if(foundUser){
-        const newAppointment: IAppointment = {
-            id,
+    if (userEntity){
+        const newAppointment = AppointmentModel.create ({
             date,
             time,
-            status: AppointmentStatus.ACTIVE,
-            userId
-        }
-        appointmentsDB.push(newAppointment)
-            id++; 
-            return newAppointment
-   // } else return undefined
-    }
+            user: userEntity
+        })
+
+        await AppointmentModel.save(newAppointment);
+        return newAppointment
+    } else return null
+ }
+
+
 //-------------------------------------------------------------  
 
-const cancelAppointmentService = async (id:number): Promise<IAppointment | undefined> => {
+const cancelAppointmentService = async (id:number): Promise<Appointment | null> => {
 
     const foundAppointment = await getAppointmentByIdService(id);
 
     if(foundAppointment){
        foundAppointment.status = AppointmentStatus.CANCELLED
+
+       await AppointmentModel.save(foundAppointment)
  }
  return foundAppointment
 };

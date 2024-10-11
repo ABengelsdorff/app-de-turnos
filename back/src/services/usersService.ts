@@ -1,47 +1,55 @@
 import UserDto from "../dto/UserDto"
-import IUser from "../interfaces/IUser"
 import { CreateCredentialsService } from "./credentialsService";
+import { User } from "../entities/User";
+import { CredentialModel, UserModel } from "../config/data-source";
 
- export const usersDB: IUser[] = []
-
-let id: number = 1;
 
 //----------------------------------------------------------------------
 
-const getUsersService = async ():Promise<IUser[]> => {
-return usersDB
+const getUsersService = async ():Promise<User[]> => {
+    const users = await UserModel.find({
+        relations: { appointments: true, credentials: true }
+    })
+    return users;
 }
 
 //----------------------------------------------------------------------
 
-const getUserByIdService = async (id: number): Promise<IUser | undefined> => {
-    const foundUser = usersDB.find((user) => user.id === id)
+const getUserByIdService = async (id: number): Promise<User | null> => {
+    const foundUser = await UserModel.findOne({
+        where: { id },
+        relations: ["appointments"],
+    })
     return foundUser;
 }
 
 //----------------------------------------------------------------------
 
-const createNewUser = async (userData: UserDto):Promise<IUser> => {
+const createNewUser = async (userData: UserDto):Promise<User> => {
 
     const { username, password, name, email, birthdate, nDni } = userData;
 
-    const newCredsId = await CreateCredentialsService({username, password})
+    const newCreds = await CreateCredentialsService({username, password})
    
-const newUser: IUser = {
-    id,
+const newUser = UserModel.create({
     name,
     email,
     birthdate, 
     nDni,
-    credentialsId: newCredsId
-}
+    credentials: newCreds
+});
 
-usersDB.push(newUser)
-id++; 
+newCreds.user = newUser;
+
+await UserModel.save(newUser);
+
+await CredentialModel.save(newCreds)
+
 return newUser
 }
 
 export { getUsersService, getUserByIdService, createNewUser}
+
 
 //----------------------------------------------------------------------
 

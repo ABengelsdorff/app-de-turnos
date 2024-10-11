@@ -2,6 +2,8 @@ import express from "express";
 //import morgan from "morgan"
 import router from "./routes";
 
+import "reflect-metadata";
+
 const server = express();
 
 server.use(express.json());

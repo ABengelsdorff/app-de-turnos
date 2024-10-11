@@ -1,36 +1,32 @@
-import ICredentials from "../interfaces/ICredentials";
 import CredentialDto from "../dto/CredentialDto";
+import { Credential } from "../entities/Credentials";
+import { CredentialModel } from "../config/data-source";
 
-const credentialsDB: ICredentials[] = []
-let id: number = 1;
 
-const CreateCredentialsService = async (credentials : CredentialDto): Promise<number> => {
+const CreateCredentialsService = async (credentials : CredentialDto): Promise<Credential> => {
     const { username , password } = credentials;
+    
 
-    const newCredentials : ICredentials = {
-        id,
+    const newCredentials = CredentialModel.create({
         username,
-        password
-    }
-    credentialsDB.push(newCredentials);
-    id++
+        password,
+    })
 
-    return newCredentials.id;
+    await CredentialModel.save(newCredentials)
+
+    return newCredentials;
 }
+
+
+//!-------------------------------------------------------------------------------------
 
 const checkCredentialsService = async (credentials : CredentialDto): Promise<number | undefined> => {
     const { username , password } = credentials;
 
-    const foundCredentials = credentialsDB.find ((cred) => cred.username === username)
-
-    /*if(foundUser) {
-        if (foundUser.password === password){
-            return foundUser.id;
-        }
-    } else throw new Error("Uno o mas datos son incorrectos");*/
+    const foundCredentials = await CredentialModel.findOneBy ({username})
 
     if(foundCredentials?.password === password) return foundCredentials.id;
-    else throw new Error("Uno o mas datos son incorrectos");
+    else return 0;
     
 }
 
