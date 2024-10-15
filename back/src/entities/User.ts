@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, Index} from "typeorm"
 import { Credential } from "./Credentials" 
 import { Appointment } from "./Appointment"
 
@@ -22,6 +22,7 @@ export class User {
     birthdate: Date
 
     @Column()
+    @Index({unique: true})
     nDni: number
 
     @OneToOne(() => Credential, (credential) => credential.user, {

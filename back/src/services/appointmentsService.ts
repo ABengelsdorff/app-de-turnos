@@ -1,12 +1,16 @@
 import { AppointmentDto } from "../dto/AppointmentDto";
 import { AppointmentStatus } from "../enums/AppointmentStatus";
 import { Appointment } from"../entities/Appointment";
-import { AppointmentModel, UserModel } from "../config/data-source";
+//import { AppointmentModel, UserModel } from "../config/data-source";
+
+import AppointmentRepository from "../repositories/AppointmentRepository";
+import UserRepository from "../repositories/UserRepository";
+
 //-------------------------------------------------------------
 
 const getAppointmentService = async ():Promise<Appointment[]> => {
 
-    const allAppointments = await AppointmentModel.find({
+    const allAppointments = await AppointmentRepository.find({
         relations : { user: true }
     })
 
@@ -16,7 +20,7 @@ const getAppointmentService = async ():Promise<Appointment[]> => {
 //-------------------------------------------------------------   
 
 const getAppointmentByIdService = async (id: number): Promise<Appointment | null> => {
-    const foundApp = await AppointmentModel.findOne({
+    const foundApp = await AppointmentRepository.findOne({
         where: { id },
         relations: ["user"]
     });
@@ -25,25 +29,23 @@ const getAppointmentByIdService = async (id: number): Promise<Appointment | null
 
 //-------------------------------------------------------------  
 
-
 const createAppointmentService = async (appointmentsData: AppointmentDto):Promise<Appointment | null> => {
 
     const { date, time, userId } = appointmentsData;
 
-    const userEntity = await UserModel.findOneBy({id:userId})
+    const userEntity = await UserRepository.findOneBy({id:userId})
 
     if (userEntity){
-        const newAppointment = AppointmentModel.create ({
+        const newAppointment = AppointmentRepository.create ({
             date,
             time,
             user: userEntity
         })
 
-        await AppointmentModel.save(newAppointment);
+        await AppointmentRepository.save(newAppointment);
         return newAppointment
     } else return null
  }
-
 
 //-------------------------------------------------------------  
 
@@ -54,7 +56,7 @@ const cancelAppointmentService = async (id:number): Promise<Appointment | null> 
     if(foundAppointment){
        foundAppointment.status = AppointmentStatus.CANCELLED
 
-       await AppointmentModel.save(foundAppointment)
+       await AppointmentRepository.save(foundAppointment)
  }
  return foundAppointment
 };

@@ -13,8 +13,8 @@ export const AppDataSource = new DataSource({
     password: DB_PASSWORD,
     database: DB_DATABASE,
     synchronize: true,
-    dropSchema: false, //limpiar la base de datos
-    logging: false, //mostrar o no información en la terminal
+    dropSchema: false, //!limpiar la base de datos
+    logging: false, //!mostrar o no información en la terminal
     entities: [Appointment, Credential, User],
     subscribers: [],
     migrations: [],
@@ -29,6 +29,6 @@ export const conectDataBase = async () => {
     }
 }
 
-export const UserModel = AppDataSource.getRepository(User)
-export const CredentialModel = AppDataSource.getRepository(Credential)
-export const AppointmentModel = AppDataSource.getRepository(Appointment)
+//export const UserModel = AppDataSource.getRepository(User)
+//export const CredentialModel = AppDataSource.getRepository(Credential)
+//export const AppointmentModel = AppDataSource.getRepository(Appointment)

@@ -1,33 +1,40 @@
 import CredentialDto from "../dto/CredentialDto";
-import { Credential } from "../entities/Credentials";
-import { CredentialModel } from "../config/data-source";
+import { Credential} from "../entities/Credentials";
+import { User } from "../entities/User";
+//import { CredentialModel } from "../config/data-source";
+import CredentialRepository from "../repositories/CredentialRepository";
 
 
 const CreateCredentialsService = async (credentials : CredentialDto): Promise<Credential> => {
     const { username , password } = credentials;
     
-
-    const newCredentials = CredentialModel.create({
+    const newCredentials = CredentialRepository.create({
         username,
         password,
     })
 
-    await CredentialModel.save(newCredentials)
+    await CredentialRepository.save(newCredentials)
 
     return newCredentials;
 }
 
+//-------------------------------------------------------------------------------------
 
-//!-------------------------------------------------------------------------------------
-
-const checkCredentialsService = async (credentials : CredentialDto): Promise<number | undefined> => {
+const checkCredentialsService = async (credentials : CredentialDto): Promise<User | undefined> => {
     const { username , password } = credentials;
 
-    const foundCredentials = await CredentialModel.findOneBy ({username})
+    if(!username || !password){
+        return undefined
+    }
 
-    if(foundCredentials?.password === password) return foundCredentials.id;
-    else return 0;
-    
+    const foundCredentials = await CredentialRepository.findOne ({
+        where: {username},
+        relations: ["user"],
+})
+
+    if(foundCredentials?.password === password) return foundCredentials.user;
 }
+
+//-------------------------------------------------------------------------------------
 
 export { CreateCredentialsService, checkCredentialsService }; 
