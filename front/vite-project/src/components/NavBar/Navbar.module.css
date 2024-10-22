@@ -1,0 +1,41 @@
+.nav {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center;
+    background-color: #C6D6ED; 
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave en la barra de navegación */
+}
+
+button {
+    background: linear-gradient(145deg, #D2DEEF, #CCD6E5);
+    border: 1px solid #FFFFFF;
+    border-radius: 12px; 
+    box-shadow: 
+        0 -10px 20px #FFFFFF,  /* Sombra clara superior */
+        0 10px 20px #5281C4;   /* Sombra oscura inferior */
+    padding: 10px 20px; 
+    color: #333; 
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s; /* Efecto de transición para el hover */
+}
+
+button:hover {
+    transform: translateY(-3px); /* Levanta el botón al hacer hover */
+    box-shadow: 
+        0 -15px 25px #FFFFFF,  /* Sombra más pronunciada al hacer hover */
+        0 15px 25px #5281C4;   /* Sombra oscura más grande al hacer hover */
+}
+
+
+.nav img {
+    height: 60px; 
+    width: 60px;
+    border-radius: 50px; /* si el alto y el ancho de la imagen es el mismo(la imagen es cuadrada), con el border-radius al 50px, se vuelve redonda */
+    box-shadow: 
+        0 -5px 10px #FFFFFF,  /* Sombra clara superior */
+        0 5px 10px #5281C4;   /* Sombra oscura inferior */
+}
+

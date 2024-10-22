@@ -1,0 +1,20 @@
+/* Estilo del contenedor */
+.container {
+    display: flex;
+    align-items: center; /* Alinea la imagen y el texto en el centro verticalmente */
+    background-color: rgb(229, 237, 240);
+    padding: 20px; /* Agrega un poco de padding para dar espacio interno */
+}
+
+/* Estilo de la imagen */
+.container img {
+    width: 250px; /* Ajusta el tamaño de la imagen */
+    height: auto;
+    margin-right: 40px; /* Agrega espacio entre la imagen y el texto */
+}
+
+/* Estilo del texto */
+.container p {
+    color: #333; /* Asegura que el texto sea visible sobre el fondo */
+    font-size: 20px; /* Ajusta el tamaño del texto */
+}

@@ -29,13 +29,13 @@ const getAppointmentById = async(req: Request, res: Response):Promise<Response> 
 
 const registerAppointment = async (req:Request, res:Response):Promise<Response> => {
     try {
-
         const { date, time, userId } = req.body
         if (!date || !time || !userId) return res.status(400).json({error: "Uno o mas datos estan incompletos"})
 
         const appointment = await createAppointmentService(req.body)
     return appointment ? res.status(201).json(appointment):
     res.status(400).json({error: "El usuario no existe"})
+    
     } catch (error) {
         return res.status(500).json(error)
     }
