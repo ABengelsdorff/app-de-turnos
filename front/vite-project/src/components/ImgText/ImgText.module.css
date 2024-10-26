@@ -1,20 +1,45 @@
-/* Estilo del contenedor */
-.container {
+.container { 
     display: flex;
-    align-items: center; /* Alinea la imagen y el texto en el centro verticalmente */
-    background-color: rgb(229, 237, 240);
-    padding: 20px; /* Agrega un poco de padding para dar espacio interno */
+    align-items: center; 
+    background-color: #E8F0F2; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    padding: 20px; 
+    margin: 20px;
+    border-radius: 8px; 
+    border: 1px solid #FFFFFF; 
 }
 
-/* Estilo de la imagen */
 .container img {
-    width: 250px; /* Ajusta el tamaño de la imagen */
+    width: 250px;
     height: auto;
-    margin-right: 40px; /* Agrega espacio entre la imagen y el texto */
+    margin-right: 25px; /* Agrega espacio entre la imagen y el texto */
+    border-radius: 8px; /* Bordes redondeados en la imagen */
+    box-shadow: 
+    0 -10px 20px #FFFFFF,
+    0 10px 20px #A1C1C1;
+    transition: transform 0.3s, box-shadow 0.3s; 
 }
 
-/* Estilo del texto */
-.container p {
-    color: #333; /* Asegura que el texto sea visible sobre el fondo */
-    font-size: 20px; /* Ajusta el tamaño del texto */
+.container img:hover {
+    transform: scale(1.1);
+    box-shadow: 
+        0 -15px 25px #FFFFFF,  /* Sombra más pronunciada al hacer hover */
+        0 15px 25px #A1C1C1;   /* Sombra oscura más grande al hacer hover */
 }
+
+
+.container p {
+
+    background: linear-gradient(145deg, #E8F0F2, #B9E0E0);
+    border: 1px solid #FFFFFF;
+    border-radius: 8px; 
+    box-shadow: 
+        0 -10px 20px #FFFFFF,
+        0 10px 20px #A1C1C1;   
+    color: #333; 
+    font-size: 18px; 
+    padding: 18px;  
+}
+
+
+

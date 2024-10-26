@@ -1,11 +1,3 @@
-//!En este módulo crear un arreglo de turnos.
-//!Estos turnos nos servirán para trabajar en nuestras aplicación
-//!antes de realizar las peticiones al Backend. 
-//!Ten en cuenta al momento de crear los objetos, que es   
-//!MUY IMPORTANTE 
-//!que tengan las mismas propiedades que envía tu aplicación de backend.
-
-
 const myAppointments = [
   {
     "id": 1,
@@ -138,6 +130,5 @@ const myAppointments = [
     }
   }
 ]
-
 
 export default myAppointments

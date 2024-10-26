@@ -1,41 +1,51 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas con el mismo ancho */
     gap: 20px;
     padding: 20px;
-    background-color: #6bdef2;
+    background-color: #E8F0F2; /* Un azul muy suave */
+    /*background: linear-gradient(145deg, #A3D6D2, #B9E0E0);  Colores de azul claro */
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
 }
 
 .turno {
-    background: linear-gradient(145deg, #D2DEEF, #CCD6E5);
+    background: linear-gradient(145deg, #D2E9E4, #B9E0E0); /* Colores suaves para cada turno */
     border: 1px solid #FFFFFF;
     border-radius: 12px;
     box-shadow: 
         0 -10px 20px #FFFFFF,  /* Sombra clara superior */
-        0 10px 20px #5281C4;   /* Sombra oscura inferior */
+        0 10px 20px #A1C1C1;   /* Sombra oscura inferior más clara */
     padding: 10px 20px;
-    width: 100%;
-    max-width: 400px;
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
-    
 }
 
 .turno:hover {
     transform: scale(1.02);
     box-shadow: 
         0 -15px 25px #FFFFFF,  /* Sombra más pronunciada al hacer hover */
-        0 15px 25px #5281C4;
+        0 15px 25px #A1C1C1;   /* Sombra oscura más grande al hacer hover */
 }
 
 .turno h1 {
     margin: 10px 0;
     font-size: 18px;
-    color: #333;
+    color: #333; /* Color de texto oscuro para contraste */
     font-family: 'Arial', sans-serif;
 }
 
+/* Para pantallas con un ancho máximo de 768px */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas más pequeñas */
+    }
+}
+
+/* Para pantallas con un ancho máximo de 480px */
+@media (max-width: 480px) {
+    .container {
+        grid-template-columns: 1fr; /* 1 columna en pantallas muy pequeñas */
+    }
+}

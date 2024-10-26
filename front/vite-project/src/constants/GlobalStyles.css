@@ -1,6 +1,8 @@
 body {
-    background-color: antiquewhite;
-    margin: 0;
+    background-color: #E8F0F2; /* Un azul muy suave */
+    /*background: #F5F5F5;  Un gris claro para un fondo suave */
+    margin: 20px;
+    padding: 0 20px; /* Aplica un margen interno de 20px a los lados */
     font-family: 'Arial', sans-serif;
 }
 
