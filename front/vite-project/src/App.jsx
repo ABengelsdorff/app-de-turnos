@@ -5,25 +5,25 @@ import "./components/NavBar/NavBar"
 import NavBar from "./components/NavBar/NavBar";
 import Register from "./views/Register/Register";
 import Login from "./views/Login/Login";
+import Footer from "./components/Footer/Footer";
 
 function App() {
 
   return (
     <>
      <NavBar/>
-     <Home/>
-     <Login/>
      
-     <MisTurnos/>
-
-    
-
+     
+     <Login/>
+     <Register/>
+     
     </> 
   )
 }
 
 export default App
 
+//!  <Home/>
+//! <MisTurnos/>
+//!  <Footer/>
 //! 
-//! 
-//! <Register/>

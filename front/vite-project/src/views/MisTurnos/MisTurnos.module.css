@@ -3,15 +3,15 @@
     grid-template-columns: repeat(3, 1fr); /* 3 columnas con el mismo ancho */
     gap: 20px;
     padding: 20px;
-    background-color: #E8F0F2; /* Un azul muy suave */
+    background-color: #E8F0F2; 
     /*background: linear-gradient(145deg, #A3D6D2, #B9E0E0);  Colores de azul claro */
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 .turno {
-    background: linear-gradient(145deg, #D2E9E4, #B9E0E0); /* Colores suaves para cada turno */
+    background: linear-gradient(145deg, #D2E9E4, #B9E0E0);  
     border: 1px solid #FFFFFF;
     border-radius: 12px;
     box-shadow: 
@@ -21,6 +21,8 @@
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
 }
+
+
 
 .turno:hover {
     transform: scale(1.02);

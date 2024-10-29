@@ -1,0 +1,26 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E8F0F2; /* Fondo suave */
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    border-radius: 8px; /* Redondeado */
+}
+
+.footer p {
+    background: linear-gradient(145deg, #D2E9E4, #B9E0E0); /* Fondo degradado */
+    border: 1px solid #FFFFFF;
+    border-radius: 12px; 
+    box-shadow: 
+        0 -10px 20px #FFFFFF,  /* Sombra superior */
+        0 10px 20px #A1C1C1;   /* Sombra inferior */
+    padding: 10px 20px; 
+    color: #333;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    text-align: center;
+    max-width: fit-content; /* Ajusta el ancho al contenido */
+}

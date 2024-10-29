@@ -21,33 +21,31 @@
     margin-top: 100px;
 }
 
-.form input {
-    background: linear-gradient(145deg, #E8F0F2, #B9E0E0);
-    border: 1px solid #FFFFFF; 
-    border-radius: 8px;
-    box-shadow: 
-        0 -10px 20px #FFFFFF,
-        0 10px 20px #A1C1C1;
-    height: 30px;
-    font-size: 18px; /* Cambia el tamaño del texto */
-    padding: 10px;    /* Opcional: Ajusta el espacio interno */
-
-}
-
 .form h2 {
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
+
+.form input {
+    background: linear-gradient(145deg, #E8F0F2, #B9E0E0);
+    border: 1px solid #FFFFFF; 
+    border-radius: 8px;
+    box-shadow: 
+        0 -5px 10px #FFFFFF,
+        0 5px 10px #A1C1C1;
+    height: 35px;
+    font-size: 16px;
+    padding: 8px;
+}
+
 input::placeholder {
     text-align: center;
 }
-img{
-    width: 50%;
-}
+
 .form p {
     color: red;
     display: flex;
     justify-content: center;
     margin-top: 3%;
- }
+}

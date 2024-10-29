@@ -1,41 +1,70 @@
+/* Navbar.module.css */
+
 .nav {
     display: flex;
-    justify-content: space-evenly; 
+    justify-content: space-evenly;
     align-items: center;
-    background-color: #E8F0F2; /* Un azul muy suave */
+    background-color: #E8F0F2;
     border-radius: 8px;
     padding: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave en la barra de navegación */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap; /* Para que los elementos bajen de línea en pantallas pequeñas */
 }
 
 button {
-    background: linear-gradient(145deg, #D2E9E4, #B9E0E0); /* Colores de azul claro */
+    background: linear-gradient(145deg, #D2E9E4, #B9E0E0);
     border: 1px solid #FFFFFF;
-    border-radius: 12px; 
+    border-radius: 12px;
     box-shadow: 
-        0 -10px 20px #FFFFFF,  /* Sombra clara superior */
-        0 10px 20px #A1C1C1;   /* Sombra oscura inferior más clara */
-    padding: 10px 20px; 
-    color: #333; 
+        0 -10px 20px #FFFFFF, 
+        0 10px 20px #A1C1C1;
+    padding: 10px 20px;
+    color: #333;
     font-size: 16px;
     font-family: 'Arial', sans-serif;
     cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s; /* Efecto de transición para el hover */
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin: 5px; /* Espacio entre botones */
 }
 
 button:hover {
-    transform: translateY(-3px); /* Levanta el botón al hacer hover */
+    transform: translateY(-3px);
     box-shadow: 
-        0 -15px 25px #FFFFFF,  /* Sombra más pronunciada al hacer hover */
-        0 15px 25px #A1C1C1;   /* Sombra oscura más grande al hacer hover */
+        0 -15px 25px #FFFFFF,
+        0 15px 25px #A1C1C1;
 }
 
 .nav img {
-    height: 60px; 
+    height: 60px;
     width: 60px;
-    border-radius: 50%; /* Convertir a redondo */
+    border-radius: 50%;
     box-shadow: 
-        0 -5px 10px #FFFFFF,  /* Sombra clara superior */
-        0 5px 10px #A1C1C1;   /* Sombra oscura inferior más clara */
+        0 -5px 10px #FFFFFF,  
+        0 5px 10px #A1C1C1;
+    margin-right: 10px;
 }
+
+/* Media query para pantallas pequeñas (tablets y móviles) */
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column; /* Cambia la disposición de los elementos a columna */
+        align-items: center;
+        padding: 10px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 16px;
+        width: 100%; /* Que los botones ocupen el 100% del ancho */
+        max-width: 300px; /* Ancho máximo de los botones */
+        margin: 5px 0; /* Separación vertical entre botones */
+    }
+
+    .nav img {
+        height: 50px;
+        width: 50px;
+        margin-bottom: 10px; /* Espacio entre la imagen y los botones */
+    }
+}
+
 

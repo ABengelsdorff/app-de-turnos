@@ -1,4 +1,398 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"); /* Importa la fuente 'Poppins' desde Google Fonts */
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  /*========== Colores ==========*/
+  --title-color: hsl(0, 0%, 15%); /* Color de los títulos */
+  --text-color: hsl(0, 0%, 35%); /* Color del texto */
+  --body-color: #E8F0F2; /* Color del fondo del cuerpo */
+  --container-color: #E8F0F2; /* Color del fondo de los contenedores */
+  
+
+  /*========== Fuentes y tipografía ==========*/
+  --body-font: "Poppins", sans-serif; /* Fuente para el cuerpo del texto */
+  --h2-font-size: 1.25rem; /* Tamaño de fuente para títulos H2 */
+  --small-font-size: .813rem; /* Tamaño de fuente pequeño */
+}
+
+/*========== Tipografía responsiva ==========*/
+@media screen and (min-width: 1120px) {
+  :root {
+    --h2-font-size: 1.5rem; /* Aumenta el tamaño de fuente de H2 en pantallas grandes */
+    --small-font-size: .875rem; /* Aumenta el tamaño de fuente pequeño en pantallas grandes */
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box; /* Incluye padding y borde en el tamaño total del elemento */
+  padding: 0; /* Elimina el padding por defecto */
+  margin: 0; /* Elimina el margen por defecto */
+}
+
+body {
+  font-family: var(--body-font); /* Aplica la fuente definida al cuerpo */
+  background-color: var(--body-color); /* Establece el color de fondo del cuerpo */
+  color: var(--text-color); /* Define el color del texto */
+}
+
+img {
+  display: block; /* Hace que las imágenes sean bloques para evitar espacios extra */
+  max-width: 150%; /* Aumenta el ancho máximo de las imágenes al 150% */
+  height: auto; /* Mantiene la relación de aspecto de la imagen */
+}
+
+/*=============== CARD ===============*/
+.container {
+  display: grid; /* Establece un diseño de grid para centrar los elementos */
+  place-items: center; /* Centra los elementos dentro del grid */
+  margin-inline: 1.5rem; /* Aplica margen a los lados */
+  margin-top: 1rem; /* Aplica margen superior */
+  padding-block: 7rem; /* Define padding en la parte superior e inferior del contenedor */
+}
+
+.card__container {
+  display: grid; /* Aplica grid a las tarjetas */
+  row-gap: 3.5rem; /* Espacio entre las filas de tarjetas */
+}
+
+.card__article {
+  position: relative; /* Posiciona los elementos en relación al contenedor */
+  overflow: hidden; /* Oculta el contenido desbordado */
+}
+
+.card__img {
+  width: 328px; /* Ancho de la imagen de la tarjeta */
+  height: 400px; /* Altura de la imagen de la tarjeta */
+  border-radius: 1.5rem; /* Bordes redondeados en la imagen */
+}
+
+.card__data {
+    width: 280px; /* Ancho del contenedor de datos de la tarjeta */
+    background: linear-gradient(145deg, #D2E9E4, #B9E0E0); /* Colores suaves para el fondo */
+    border: 1px solid #FFFFFF; /* Borde blanco */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 
+        0 -10px 20px #FFFFFF,  /* Sombra clara superior */
+        0 10px 20px #A1C1C1;   /* Sombra oscura inferior más clara */
+    padding: 10px 20px; /* Padding ajustado */
+    text-align: center; /* Centra el texto dentro del contenedor */
+    position: absolute; /* Posición absoluta para colocar el contenedor */
+    bottom: -9rem; /* Ajusta la posición desde la parte inferior */
+    left: 0; /* Alinea a la izquierda */
+    right: 0; /* Alinea a la derecha */
+    margin-inline: auto; /* Centra horizontalmente */
+    opacity: 0; /* Oculta inicialmente el contenedor de datos */
+    transition: opacity 1s 1s, transform 0.3s, box-shadow 0.3s; /* Transiciones para opacidad, transformación y sombra */
+  }
+
+.card__description {
+    display: block; /* Muestra el elemento como bloque */
+    font-size: 1.1em; /* Tamaño de fuente de la descripción */
+    margin-bottom: .25rem; /* Margen inferior */
+  }
+  
+
+.card__text {
+  font-size: var(--small-font-size); /* Tamaño de fuente para el texto */
+  color: var(--text-color); /* Color del texto */
+  margin-top: 0.5rem; /* Margen superior */
+  line-height: 1.6; /* Altura de línea */
+}
+
+/* Animaciones en hover */
+.card__article:hover .card__data {
+    animation: show-data 1s forwards; /* Muestra el contenedor de datos */
+    opacity: 1; /* Hace visible el contenedor de datos */
+    transform: translateY(-1rem); /* Ajuste para darle un ligero efecto de elevación */
+    transition: opacity 0.3s; /* Transición para la opacidad */
+  }
+
+.card__article:hover {
+  animation: remove-overflow 2s forwards; /* Elimina el overflow al hacer hover */
+}
+
+.card__article:not(:hover) {
+  animation: show-overflow 2s forwards; /* Restaura el overflow al quitar el hover */
+}
+
+.card__article:not(:hover) .card__data {
+    animation: remove-data 0.5s forwards; /* Cambiar a 0.5s para desaparecer más rápido */
+    opacity: 0; /* Asegurar que desaparezca completamente */
+    transition: opacity 0.3s; /* Reducir la transición de opacidad a 0.3s */
+  }
+
+/* Animación para mostrar los datos */
+@keyframes show-data {
+  50% {
+    transform: translateY(-10rem); /* Mueve hacia arriba */
+  }
+  100% {
+    transform: translateY(-7rem); /* Ajusta la posición final */
+  }
+}
+
+@keyframes remove-overflow {
+  to {
+    overflow: initial; /* Restaura el overflow */
+  }
+}
+
+@keyframes remove-data {
+    0% {
+      transform: translateY(-7rem);
+    }
+    50% {
+      transform: translateY(-10rem);
+    }
+    100% {
+      transform: translateY(0.5rem);
+    }
+  }
+
+@keyframes show-overflow {
+  0% {
+    overflow: initial; /* Overflow inicial */
+    pointer-events: none; /* Desactiva eventos */
+  }
+  50% {
+    overflow: hidden; /* Oculta el overflow */
+  }
+}
+
+/*=============== PUNTOS DE RUPTURA (BREAKPOINTS) ===============*/
+/* Para dispositivos pequeños */
+@media screen and (max-width: 340px) {
+  .container {
+    margin-inline: 1rem; /* Reduce el margen lateral en pantallas pequeñas */
+  }
+
+  .card__data {
+    width: 250px; /* Reduce el ancho del contenedor de datos */
+    padding: 1rem; /* Reduce el padding */
+  }
+}
+
+/* Para dispositivos medianos */
+@media screen and (min-width: 768px) {
+  .card__container {
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas para las tarjetas */
+    column-gap: 1.5rem; /* Espacio entre las columnas */
+  }
+}
+
+/* Para dispositivos grandes */
+@media screen and (min-width: 1120px) {
+  .container {
+    margin-top: 1rem; /* Ajusta el margen superior */
+  }
+
+  .card__container {
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas para las tarjetas */
+  }
+  .card__img {
+    width: 348px; /* Aumenta el ancho de la imagen */
+  }
+  .card__data {
+    width: 316px; /* Aumenta el ancho del contenedor de datos */
+    padding-inline: 2.5rem; /* Aumenta el padding horizontal */
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+.container {
+    display: flex;
+    justify-content: space-around; 
+    gap: 20px; 
+    margin-top: 50px; 
+}
+img{
+    border-radius: 18px;
+}
+
+.imageContainer {
+    position: relative; 
+    overflow: hidden; 
+}
+
+.imageContainer p {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+}
+
+
+
+.imageContainer img {
+    width: 300px; 
+    height: auto; 
+    filter: grayscale(100%); 
+    transition: filter 0.25s; 
+}
+
+
+.imageContainer img:hover {
+    filter: grayscale(0); 
+}
+
+
+.textContainer {
+    position:relative; 
+    bottom: -100%; 
+   
+    width: 70%; 
+    background-color: rgb(250, 31, 31);
+    color: rgb(6, 6, 6);
+   
+
+    transform: scale(0.5);
+    transition: bottom 1s ease-in-out, transform 0.5s ease-in-out; 
+}
+
+
+
+.imageContainer:hover .textContainer {
+    bottom: 0; 
+    transform: scale(1);
+    background-color: aqua;
+}
+
+
+.imageContainer p {
+    padding: 10px;
+    margin: 0;
+    text-align: center; 
+    font-size: 20px;  
+}
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+body{
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #000;
+}
+
 .container { 
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+  width: 800px;
+  height: 500px;
+  background: #000;
+  transition: 0.25s;
+}
+
+.container img {
+   position: relative;
+   background: var(--img);
+    background-position: center;
+    background-size: cover;
+    transition: 0.25s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: grayscale(0) brightness(1.25)
+}
+
+.container:hover .img {
+    filter: grayscale(1);
+}
+
+.container .img:hover{
+    filter: grayscale(0) brightness(1.25)
+}
+
+.container:has(.One:hover){
+    grid-template-columns: 2fr 0.5fr 0.5fr 0.5fr 0.5fr ;
+}
+
+.container:has(.Two:hover){
+    grid-template-columns: 2fr 0.5fr 0.5fr 0.5fr 0.5fr ;
+}
+
+.container:has(.Three:hover){
+    grid-template-columns: 2fr 0.5fr 0.5fr 0.5fr 0.5fr ;
+}
+
+
+.container img::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#000, transparent, transparent, transparent, #000);
+}
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.container { 
     display: flex;
     align-items: center; 
     background-color: #E8F0F2; 
@@ -12,8 +406,8 @@
 .container img {
     width: 250px;
     height: auto;
-    margin-right: 25px; /* Agrega espacio entre la imagen y el texto */
-    border-radius: 8px; /* Bordes redondeados en la imagen */
+    margin-right: 25px; 
+    border-radius: 8px;  
     box-shadow: 
     0 -10px 20px #FFFFFF,
     0 10px 20px #A1C1C1;
@@ -23,8 +417,8 @@
 .container img:hover {
     transform: scale(1.1);
     box-shadow: 
-        0 -15px 25px #FFFFFF,  /* Sombra más pronunciada al hacer hover */
-        0 15px 25px #A1C1C1;   /* Sombra oscura más grande al hacer hover */
+        0 -15px 25px #FFFFFF,  
+        0 15px 25px #A1C1C1;   
 }
 
 
@@ -40,6 +434,6 @@
     font-size: 18px; 
     padding: 18px;  
 }
-
+*/
 
 

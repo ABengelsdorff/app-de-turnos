@@ -1,56 +1,183 @@
-//*Formulario de register
-//!Crear los inputs necesarios para los datos del usuario
-//
-//Todos los campos son obligatorios
+import axios from "axios";
+import { useState,} from "react";
+import styles from "./Register.module.css"
+import { validateRegisterForm } from "../../helpers/validateRegisterForm";
 
-//import { useState } from "react";
 
 
 const Register = () => {
-    return (
-
-        <h1> Este es mi componente de Register</h1>  
-        
-    )
-};
-
-/* const Register = () => {
-    const [form, setForm] = useState({
+    
+    const [newUserData, setNewUserData] = useState({
 
     "name": "",
     "email": "",
     "birthdate": "",
     "nDni": "",
     "username": "",
-    "password": ""
+    "password": "",
+    "repeatPassword": ""
     });
 
-    const funcionPeticion = () => {
-        axios.post("http://localhost:3000/users/register"), form}
-    }; */
 
+    const [errors, setErrors] = useState({})
 
-    /* 
-    Implementar en el componente Register un formulario controlado 
-    que se encargará del registro de usuario. 
-
-Controlar el formulario de manera tal que se pueda validar 
-que todos los datos necesarios para el registro están completos, 
-al mismo tiempo que los datos de los inputs son reflejados en 
-el estado local correspondiente y viceversa.
-
-Una vez completos y validados los datos, se debe poder presionar 
-un botón que dispare un evento, el cual ejecutará una función que 
-se encargue de realizar la petición de tipo POST correspondiente
- al servidor para el registro del usuario enviando como body el 
- estado que se confeccionó a través del formulario. 
-
-En caso de que el registro sea exitoso, informar al usuario. 
-Del mismo modo, informar al usuario si ha ocurrido un error.
-    */
+    const [ touched, setTouched ] = useState({})
 
 
 
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+
+        setNewUserData({
+            ...newUserData,
+            [name]: value
+        })
+        setErrors (validateRegisterForm({...newUserData, [name]: value}))
+
+    }
+
+        const handleBlur = (event) => {
+
+            const { name } = event.target
+
+            setTouched ({
+                ...touched,
+                [name]: true
+            })
+            setErrors(validateRegisterForm(newUserData))
+        }
+
+        const resetForm = () => {
+            setNewUserData({
+                "name": "",
+                "email": "",
+                "birthdate": "",
+                "nDni": "",
+                "username": "",
+                "password": "",
+                "repeatPassword": ""
+                });
+
+                setErrors({});
+                setTouched({});
+        }
+
+        //Para evitar el comportamiento por defecto del formulario 
+        //que es actualizarce cada vez que precione el boton
+        const submitRegisterForm = async (event) => {
+            event.preventDefault();
+            try {
+                
+                if(!Object.keys(errors).length){
+                    await axios.post("http://localhost:3000/users/register", newUserData)
+
+                    resetForm()
+
+                    alert("Usuario creado con éxito")
+                }else(alert("Errores en el formulario"))
+
+            } catch (error) {
+                alert(error)
+            }
+        }
+
+    return (
+        <div className={styles.container}>
+            <form onSubmit={submitRegisterForm} className={styles.form}>
+                <h2>Formulario de registro</h2>
+                
+                    <div>
+                        <input
+                        placeholder="NAME"
+                            type="text"
+                            name="name"
+                            value={newUserData.name}
+                            onChange={handleInputChange}
+                            onBlur={handleBlur}
+                        />
+                        {touched.name && errors.name && <p>{errors.name}</p>}
+                    </div>
+                   
+                    <div>
+                        <input
+                        placeholder="EMAIL"
+                            type="email"
+                            name="email"
+                            value={newUserData.email}
+                            onChange={handleInputChange}
+                            onBlur={handleBlur}
+                        />
+                         {touched.email && errors.email && <p>{errors.email}</p>}
+                    </div>
+                    
+                    <div>
+                        <input
+                        placeholder="BIRTHDATE"
+                            type="date"
+                            name="birthdate"
+                            value={newUserData.birthdate}
+                            onChange={handleInputChange}
+                            onBlur={handleBlur}
+                        />
+                         {touched.birthdate && errors.birthdate && <p>{errors.birthdate}</p>}
+                    </div>
+                    
+                    <div>
+                        <input
+                            placeholder="N° DNI"
+                            type="number"
+                            name="nDni"
+                            value={newUserData.nDni}
+                            onChange={handleInputChange}
+                            onBlur={handleBlur}
+                        />
+                         {touched.nDni && errors.nDni && <p>{errors.nDni}</p>}
+                    </div>
+                    
+                        <div>
+                        <input
+                            placeholder="USERNAME"
+                            type="text"
+                            name="username"
+                            value={newUserData.username}
+                            onChange={handleInputChange}
+                            onBlur={handleBlur}
+                        />
+                         {touched.username && errors.username && <p>{errors.username}</p>}
+                    </div>
+                    
+                    <div>
+                        <input
+                            placeholder="CONTRASEÑA"
+                            type="password"
+                            name="password"
+                            value={newUserData.password}
+                            onChange={handleInputChange}
+                            onBlur={handleBlur}
+                        />
+                         {touched.password && errors.password && <p>{errors.password}</p>}
+                    </div>
+
+                    <div>
+                        <input
+                            placeholder="REPETIR CONTRASEÑA"
+                            type="password"
+                            name="repeatPassword"
+                            value={newUserData.repeatPassword}
+                            onChange={handleInputChange}
+                            onBlur={handleBlur}
+                        />
+                         {touched.repeatPassword && errors.repeatPassword && <p>{errors.repeatPassword}</p>}
+                    </div>
+
+                <button type="submit">Registrarse</button>
+
+            </form>
+        </div>
+    )
+}; 
 
 
 export default Register;
+
+

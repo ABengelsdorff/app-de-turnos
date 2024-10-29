@@ -1,121 +1,134 @@
-//import axios from "axios";
-import styles from "./Login.module.css"
-//import { useEffect, useState } from "react";
+import axios from "axios";
+import styles from "./Login.module.css";
+import { useState } from "react";
+import { validateLogin } from "../../helpers/validateLogin";
+
+import estadoInicio from "../../assets/mientrastanto.gif"; // GIF para estado inactivo (opcional)
+import estadoEmail from "../../assets/cuandoescribeel mail.gif"; // GIF cuando se escribe el email
+import estadoContraseña from "../../assets/cuandoponemostrarlacontrasea.gif"; // GIF cuando se escribe la contraseña
+
+
 
 const Login = () => {
     const [userData, setUserData] = useState({
         username: "",
         password: "",
-    })
+    });
 
-    const handleImputChange = (event) => {
-        console.log(event);
-        const { name, value } = event.target;
+
+
+    const [errors, setErrors] = useState({})
+
+    const [ touched, setTouched ] = useState({})
+
+
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target; //desestructuro name y value de event.target
 
         setUserData({
-            ...userData,
-            [name]: value
-        });
+                ...userData,
+                [name]: value,
+            }) 
+            setErrors (validateLogin({...userData, [name]: value}))
+    };
 
-        // if (name === "username"){
-        //     setUserData({
-        //         ...setUserData,
-        //         username: value
-        //     })
-        // }
-        // if(name === "password") {
-        //     setUserData({
-        //         ...setUserData,
-        //         password: value
-        //     })
-        // }
 
-        }
-        const handleOnSubmit = (event) => {
-            event.preventDefault();
-            alert(`Username: ${userData.username} Password: ${userData.password}`)
+    const handleBlur = (event) => {
+
+        const { name } = event.target
+
+        setTouched ({
+            ...touched,
+            [name]: true
+        })
+        setErrors(validateLogin(userData))
     }
 
-        
 
-//!             Ver
+    const resetForm = () => {
+        setUserData ({
+            username: "",
+            password: "",
+        });
 
-   /* useEffect(() => {
-        axios
-        .post("http://localhost:3000/users/login")
-        .then((res) => {setUserData(res.data);
-        })
-        .catch((error) => console.log(error))
-    }),[]; */
-
+        setErrors({}); 
+        setTouched({});
+    }
 
 
-//!        Esto está OK 
+
+
+    const submitLogin = async (event) => {
+        event.preventDefault();
+        try {
+            if(!Object.keys(errors).length){
+                await axios.post("http://localhost:3000/users/login", userData)
+                
+               resetForm()
+                
+                alert("Usuario logeado correctamente")
+            }else(alert("Errores en el formulario"))
+           
+        } catch (error) {
+            if(error.status >= 400 && error.status <= 499)
+                return alert("Usuario o contraseña incorrecto");
+            return alert("Error del servidor")
+        }
+    };
+
+
+    let characterGif = estadoInicio; // Estado por defecto
+    if (userData.username) {
+      characterGif = estadoEmail; // Cuando se escribe un email
+    }
+    if (userData.password) {
+      characterGif = estadoContraseña; // Dependiendo del estado de la contraseña
+    }
+
+
 
     return (
-            <div className={styles.container}>
+        <div className={styles.container}>
+            <form onSubmit={submitLogin} className={styles.form}>
+                
+            <img
+          src={characterGif}
+          alt="Character animation"
+          className={styles.character}
+        />
+                
+                <h2>LOGIN</h2>
 
-                <form onSubmit={handleOnSubmit} className={styles.form}>
+                <div>
+                    <input 
+                        placeholder="USUARIO"
+                        type="text"
+                        value={userData.username}
+                        name="username"
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                    />
+                    {touched.username && errors.username && <p>{errors.username}</p>}
+                </div>
 
-                    <h2>LOGIN</h2>
+                <div>
+                    <input 
+                        placeholder="CONTRASEÑA"
+                        type="password"
+                        value={userData.password}
+                        name="password"
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                    />
+                    {touched.password && errors.password && <p>{errors.password}</p>} 
 
-                        <div>
-                            <label>USUARIO: </label>
-                            <input 
-                            type="text"
-                            value={userData.username}
-                            name="username"
-                            placeholder="    example@gmail.com"
-                            onChange={handleImputChange}
-                            />
-                        </div>
+                </div>
 
-                            <div>
-                                <label>CONTRASEÑA: </label>
-                                <input 
-                                type="password"
-                                value={userData.password}
-                                name="password"
-                                onChange={handleImputChange}
-                                />
-                            </div>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    );
+};
 
-                        <button>Enviar</button>
-
-                </form>
-
-            </div>
-
-    )
-}
-
-
-export default Login
-/*
-{
-    "username" : "SGomez96",
-    "password" : "SantiagoG2024"  
-} 
-*/
-
-
-//!Formulario controlado => email, pasword
-//!enviar la peticion al backend /users/login
-//!pasandole email y pasword y que me devuelva la respuyesta si esta logeado o no.
-
-/*Implementar en el componente Login un formulario controlado que
- se encargará del login del usuario. 
-
-Controlar el formulario de manera tal que se pueda validar que 
-todos los datos necesarios para el login están completos,
- al mismo tiempo que los datos de los inputs son reflejados en el estado 
- local correspondiente y viceversa. 
-
-Una vez completos y validados los datos, se debe poder presionar un botón 
-que dispare un evento, el cual ejecutará una función que se encargue 
-de realizar la petición de tipo POST correspondiente al servidor 
-para el login del usuario enviando como body el estado que se 
-confeccionó a través del formulario.
-
-En caso de que el login sea exitoso, informar al usuario. 
-Del mismo modo, informar al usuario si ha ocurrido un error.*/
+export default Login;
