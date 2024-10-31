@@ -11,7 +11,8 @@
     flex-wrap: wrap; /* Para que los elementos bajen de línea en pantallas pequeñas */
 }
 
-button {
+.link {
+    text-decoration: none;
     background: linear-gradient(145deg, #D2E9E4, #B9E0E0);
     border: 1px solid #FFFFFF;
     border-radius: 12px;
@@ -27,7 +28,7 @@ button {
     margin: 5px; /* Espacio entre botones */
 }
 
-button:hover {
+.link:hover {
     transform: translateY(-3px);
     box-shadow: 
         0 -15px 25px #FFFFFF,

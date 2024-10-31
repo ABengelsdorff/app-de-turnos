@@ -7,23 +7,32 @@ import Register from "./views/Register/Register";
 import Login from "./views/Login/Login";
 import Footer from "./components/Footer/Footer";
 
+import { Routes, Route } from "react-router-dom";
+
 function App() {
 
   return (
     <>
+
      <NavBar/>
+
+     <Routes>
+
+      <Route path="/" element={<Home/>}/>
+
+      <Route path="MisTurnos" element={<MisTurnos/>} />
+
+      <Route path="Login" element={<Login/>} />
+
+      <Route path="Register" element={<Register/>} />
      
+
+     </Routes>
      
-     <Login/>
-     <Register/>
-     
+     <Footer/>
+
     </> 
   )
 }
 
 export default App
-
-//!  <Home/>
-//! <MisTurnos/>
-//!  <Footer/>
-//! 

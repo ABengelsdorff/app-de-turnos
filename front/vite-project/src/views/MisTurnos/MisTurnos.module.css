@@ -7,7 +7,7 @@
     /*background: linear-gradient(145deg, #A3D6D2, #B9E0E0);  Colores de azul claro */
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-top: 50px;
+    margin-top: 100px;
 }
 
 .turno {
@@ -36,6 +36,29 @@
     font-size: 18px;
     color: #333; /* Color de texto oscuro para contraste */
     font-family: 'Arial', sans-serif;
+}
+
+button {
+    background: linear-gradient(145deg, #D2E9E4, #B9E0E0);
+    border: 1px solid #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 
+        0 -10px 20px #FFFFFF, 
+        0 10px 20px #A1C1C1;
+    padding: 10px 20px;
+    color: #333;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin: 5px; /* Espacio entre botones */
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 -15px 25px #FFFFFF,
+        0 15px 25px #A1C1C1;
 }
 
 /* Para pantallas con un ancho máximo de 768px */

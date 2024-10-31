@@ -31,8 +31,6 @@ const MisTurnos = () => {
 
     return (
         <>
-            <h1>Este es el componente MisTurnos 😎</h1>
-            
             <div className={styles.container}>
                 {
                     appointment?.appointments?.map((appointment) => (
