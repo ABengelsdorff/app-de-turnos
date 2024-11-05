@@ -46,7 +46,7 @@ const registerUser = async (req:Request, res:Response):Promise<Response> => {
 
         const foundUserByEmail = await getUserByWhereClauseService ({id: null, email})
         if(foundUserByEmail){
-            res.status(400)
+            return res.status(400)
             .json({error: "Ya existe un usuario con ese email"})
         }
 
@@ -78,5 +78,6 @@ const login = async (req: Request, res: Response):Promise<Response> => {
 //----------------------------------------------------------------------
 
 export { getUsers, getUserById, registerUser, login}
+
 
 

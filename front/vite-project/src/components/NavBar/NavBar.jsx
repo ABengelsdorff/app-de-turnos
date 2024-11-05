@@ -1,18 +1,41 @@
 import styles from "./Navbar.module.css";
 import yogaImage from "../../assets/yogagif.gif"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
+
 
 const NavBar = () => {
+
+    const navigate = useNavigate();
+
+    const { userActive, setUserActive, setUserAppointments} = useUser()
+
+    const handleLogout = () => {
+
+        setUserActive({});
+        setUserAppointments([]);
+        navigate("/")
+
+    }
+
     return (
         <div className={styles.nav}>
-            <img src={yogaImage}></img>
+            <img src={yogaImage} alt="Yoga" />
 
-            <Link to="/" className={styles.link}>INICIO</Link>
-            <Link to="/MisTurnos" className={styles.link}>MIS TURNOS</Link>
-            <Link to="/Login" className={styles.link}>LOGIN</Link>
-            <Link to="/Register" className={styles.link}>REGISTRO</Link>
-
-
+            {userActive.name ? (
+                <>
+                    <Link to="/" className={styles.link}>INICIO</Link>
+                    <Link to="/MisTurnos" className={styles.link}>MIS TURNOS</Link>
+                    <Link to="/CrearTurno" className={styles.link}>CREAR TURNO</Link>
+                    <button onClick={handleLogout}>CERRAR SESIÓN</button>
+                </>
+            ) : (
+                <>
+                    <Link to="/" className={styles.link}>INICIO</Link>
+                    <Link to="/Login" className={styles.link}>LOGIN</Link>
+                    <Link to="/Register" className={styles.link}>REGISTRO</Link>
+                </>
+            )}
         </div>
     );
 };
@@ -20,12 +43,58 @@ const NavBar = () => {
 export default NavBar;
 
 
+
+
+
+
+
+
+
+
+
+
+
 /*
-            <button>INICIO</button>
 
-            <button>MIS TURNOS</button>
+const NavBar = () => {
+    const navigate = useNavigate();
+    const { user, logout } = useUser(); // Extraemos el usuario y la función de logout del contexto
 
-            <button>NUEVO TURNO</button>
+    const handleLogout = () => {
+        logout(); // Llamamos a la función logout del contexto
+        navigate("/");
+    };
 
-            <button>MI PERFIL</button>
+    return (
+        <div className={styles.nav}>
+            <img src={yogaImage} alt="Yoga gif" />
+
+            <Link to="/" className={styles.link}>INICIO</Link>
+
+           
+            {!user && (
+                <>
+                    <Link to="/Login" className={styles.link}>LOGIN</Link>
+                    <Link to="/Register" className={styles.link}>REGISTRO</Link>
+                </>
+            )}
+
+           
+            {user && (
+                <>
+                    <Link to="/MisTurnos" className={styles.link}>MIS TURNOS</Link>
+                    <Link to="/CrearTurno" className={styles.link}>CREAR TURNO</Link>
+                    <button onClick={handleLogout} className={styles.link}>CERRAR SESION</button>
+                </>
+            )}
+        </div>
+    );
+};
+
+export default NavBar;
 */
+
+
+
+
+

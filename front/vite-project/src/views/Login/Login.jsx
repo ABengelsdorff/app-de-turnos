@@ -2,25 +2,32 @@ import axios from "axios";
 import styles from "./Login.module.css";
 import { useState } from "react";
 import { validateLogin } from "../../helpers/validateLogin";
+import { useNavigate } from "react-router-dom"
 
 import estadoInicio from "../../assets/mientrastanto.gif"; // GIF para estado inactivo (opcional)
 import estadoEmail from "../../assets/cuandoescribeel mail.gif"; // GIF cuando se escribe el email
 import estadoContraseña from "../../assets/cuandoponemostrarlacontrasea.gif"; // GIF cuando se escribe la contraseña
 
+import { Link } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
+
 
 
 const Login = () => {
-    const [userData, setUserData] = useState({
+    const { setUserActive } = useUser();
+
+    const [userData, setUserData] = useState({ //Guarda los datos ingresados del formulario 
         username: "",
         password: "",
     });
 
 
 
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState({}) //Guarda los mensajes de error para cada campo del formulario.
 
-    const [ touched, setTouched ] = useState({})
-
+    const [ touched, setTouched ] = useState({}) // Lleva registro de los campos que han sido tocados o enfocados, para mostrar errores solo cuando el usuario ha interactuado con ellos.
+   
+    const navigate = useNavigate(); 
 
 
     const handleInputChange = (event) => {
@@ -58,16 +65,25 @@ const Login = () => {
 
 
 
-
     const submitLogin = async (event) => {
         event.preventDefault();
         try {
             if(!Object.keys(errors).length){
-                await axios.post("http://localhost:3000/users/login", userData)
-                
+                const loggedUser = await axios.post("http://localhost:3000/users/login", userData)
+
+                localStorage.setItem("userID", loggedUser.data.user.id)
+
+
+
                resetForm()
                 
-                alert("Usuario logeado correctamente")
+                alert("Usuario logeado correctamente");
+
+                setUserActive(loggedUser.data.user)
+
+                navigate("/MisTurnos");
+
+
             }else(alert("Errores en el formulario"))
            
         } catch (error) {
@@ -126,6 +142,8 @@ const Login = () => {
                 </div>
 
                 <button type="submit">Enviar</button>
+                <p className={styles.mensaje}>Para registrarte haz clic <span style={{ marginRight: "4px" }}> </span> <Link to={"/Register"}> acá</Link></p>
+
             </form>
         </div>
     );
