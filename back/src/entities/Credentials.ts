@@ -1,7 +1,6 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm"
 import { User } from "./User"
 
-
 @Entity({
     name: "credentials"
 })

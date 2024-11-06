@@ -7,7 +7,7 @@ const texts = [
         title: "La Historia del Yoga",
         description: "Un viaje a través de la milenaria tradición del yoga.",
         text: "Originado en India hace más de 5,000 años, el yoga ha evolucionado desde una práctica espiritual hacia diversas formas modernas. Su rica historia refleja la búsqueda de equilibrio y bienestar de la humanidad a lo largo del tiempo.",
-        image: yogaImage2 // Asegúrate de que la ruta de la imagen sea correcta
+        image: yogaImage2 
     },
     {
         title: "Meditación en el Yoga",

@@ -10,17 +10,13 @@ const CrearTurno = () => {
     const navigate = useNavigate();
     const { userActive } = useUser();
     const [appointmentData, setAppointmentData] = useState({
-
             date: "",
             time: "",
     });
  
-
     const [errors, setErrors] = useState({})
 
     const [ touched, setTouched ] = useState({})
-
-
 
     const handleInputChange = (event) => {
         const { name, value } = event.target; //desestructuro name y value de event.target
@@ -33,8 +29,6 @@ const CrearTurno = () => {
             setAppointmentData(newAppointmentData);
             setErrors (validateNuevoTurno(newAppointmentData))  // Usa la nueva cita para validar
     };
-
-
     
     const handleBlur = (event) => {
 
@@ -47,8 +41,6 @@ const CrearTurno = () => {
         setErrors(validateNuevoTurno(appointmentData))
     }
 
-
-
     const resetForm = () => {
         setAppointmentData ({
             date: "",
@@ -58,8 +50,6 @@ const CrearTurno = () => {
         setErrors({}); 
         setTouched({});
     }
-
-
 
     const submitNuevoTurno = async (event) => {
         event.preventDefault();
@@ -79,7 +69,6 @@ const CrearTurno = () => {
             alert(` Error al solicitar un turno ${error}`)
         }
     }
-
 
     return (
         <div className={styles.container}>

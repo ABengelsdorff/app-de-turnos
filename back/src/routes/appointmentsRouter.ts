@@ -4,22 +4,22 @@ import { getAppointment, getAppointmentById, registerAppointment, cancelAppointm
 const router: Router = Router();
 
 
-//! Obtener el listado de los turnos
+// Obtener el listado de los turnos
 router.get("/", getAppointment)
 
 //------------------------------------------------------
 
-//! Obtener el detalle de un turno específico
+// Obtener el detalle de un turno específico
 router.get("/:id", getAppointmentById)
 
 //------------------------------------------------------
 
-//!crear turno/ Registro de un nuevo turno.
+// Crear turno/ Registro de un nuevo turno.
 router.post("/schedule", registerAppointment)
 
 //------------------------------------------------------
 
-//!cancelar turno.
+// Cancelar turno.
 router.put("/cancel/:id", cancelAppointment)
 
 //------------------------------------------------------

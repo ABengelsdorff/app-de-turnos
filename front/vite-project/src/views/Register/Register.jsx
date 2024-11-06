@@ -78,9 +78,6 @@ const Register = () => {
         <div className={styles.container}>
             <form onSubmit={submitRegisterForm} className={styles.form}>
                 <h2>Formulario de registro</h2>
-
-                
-
                 <div>
                     <input
                         placeholder="NAME"
@@ -110,11 +107,15 @@ const Register = () => {
                 <div>
                     <input
                         placeholder="BIRTHDATE"
-                        type="date"
+                        type="text"
                         name="birthdate"
                         value={newUserData.birthdate}
+                        onFocus={(e) => (e.target.type = "date")} 
+                        onBlur={(e) => {  
+                            if (!newUserData.birthdate) e.target.type = "text"; 
+                            handleBlur(e); 
+                        }}
                         onChange={handleInputChange}
-                        onBlur={handleBlur}
                     />
                     {touched.birthdate && errors.birthdate && <p>{errors.birthdate}</p>}
                 </div>

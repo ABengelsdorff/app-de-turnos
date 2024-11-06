@@ -6,23 +6,23 @@ const router: Router = Router();
 
 //------------------------------------------------------
 
-//! Obtener el listado de todos los usuarios
+// Obtener el listado de todos los usuarios
 router.get("/", getUsers)
 
 //------------------------------------------------------
 
-//! Obtener el detalle de un usuario específico
+// Obtener el detalle de un usuario específico
 router.get("/:id", getUserById);
 
 //------------------------------------------------------
 
 
-//!Crear usuario/ Registro de un nuevo usuario.
+// Crear usuario/ Registro de un nuevo usuario.
 router.post("/register", registerUser) 
 
 //------------------------------------------------------
 
-//!Verificar login del usuario.
+// Verificar login del usuario.
 router.post("/login", login)
 
 //------------------------------------------------------

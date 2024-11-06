@@ -23,14 +23,17 @@ const Home = () => {
                      />
                 ))}
             </div>
-            <p className={styles.parrafoInicio}><br></br>El yoga, más que una simple práctica, es un viaje de autoconocimiento y transformación personal. Al incorporar el yoga en tu vida diaria, no solo mejoras tu bienestar físico, sino que también cultivas la paz mental y la conexión espiritual. Esta disciplina milenaria nos enseña a vivir el presente, a abrazar la impermanencia y a encontrar la armonía en cada respiración. <br></br>
+            <p className={styles.parrafoInicio}>
+                <br></br>
+                    El yoga, más que una simple práctica, es un viaje de autoconocimiento y transformación personal. Al incorporar el yoga en tu vida diaria, no solo mejoras tu bienestar físico, sino que también cultivas la paz mental y la conexión espiritual. Esta disciplina milenaria nos enseña a vivir el presente, a abrazar la impermanencia y a encontrar la armonía en cada respiración. <br></br>
 
-Con el tiempo, las posturas y la meditación se convierten en herramientas valiosas para enfrentar los desafíos de la vida, permitiéndonos fluir con mayor facilidad y gracia. Practicar yoga te ofrece la oportunidad de desconectar del ruido del mundo exterior y reconectar con tu interior, creando un espacio de calma en medio del caos.<br></br>
+                    Con el tiempo, las posturas y la meditación se convierten en herramientas valiosas para enfrentar los desafíos de la vida, permitiéndonos fluir con mayor facilidad y gracia. Practicar yoga te ofrece la oportunidad de desconectar del ruido del mundo exterior y reconectar con tu interior, creando un espacio de calma en medio del caos.<br></br>
 
-Además, el yoga fomenta la autocompasión y la aceptación, enseñándonos a ser amables con nosotros mismos en cada etapa de nuestro viaje. Al explorar diferentes estilos y técnicas, encuentras un enfoque que resuena contigo, enriqueciendo tu experiencia y profundizando tu práctica. Así, el yoga se transforma en un refugio en el que descubrimos nuestro verdadero ser y cultivamos la compasión hacia nosotros mismos y hacia los demás, creando un impacto positivo que se extiende más allá del mat.<br></br>
+                    Además, el yoga fomenta la autocompasión y la aceptación, enseñándonos a ser amables con nosotros mismos en cada etapa de nuestro viaje. Al explorar diferentes estilos y técnicas, encuentras un enfoque que resuena contigo, enriqueciendo tu experiencia y profundizando tu práctica. Así, el yoga se transforma en un refugio en el que descubrimos nuestro verdadero ser y cultivamos la compasión hacia nosotros mismos y hacia los demás, creando un impacto positivo que se extiende más allá del mat.<br></br>
 
-Integrar el yoga en tu vida puede abrirte a nuevas perspectivas, ayudándote a enfrentar los altibajos con una mente más clara y un corazón más abierto. Este camino de transformación no tiene fin; cada práctica es una nueva oportunidad para crecer y evolucionar, llevándote hacia una vida más plena y consciente.</p>
-            <p><br /></p>
+                    Integrar el yoga en tu vida puede abrirte a nuevas perspectivas, ayudándote a enfrentar los altibajos con una mente más clara y un corazón más abierto. Este camino de transformación no tiene fin; cada práctica es una nueva oportunidad para crecer y evolucionar, llevándote hacia una vida más plena y consciente.</p>
+                <p><br />
+            </p>
             <img className={styles.imgInicio} src={yogaImag} alt="Yoga"/>
             
         </div>

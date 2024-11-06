@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { getAppointmentService, getAppointmentByIdService, createAppointmentService, cancelAppointmentService } from "../services/appointmentsService";
 
-
 const getAppointment = async (req: Request, res: Response):Promise<Response> => {
     try {
         const allApp = await getAppointmentService();

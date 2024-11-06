@@ -16,10 +16,8 @@ const ProtectedRoute = ({ children }) => {
 if(!userId){
   return <Navigate to={"/Login"} />
 }
-
   return children;
 }
-
 
 function App() {
 
@@ -37,22 +35,18 @@ function App() {
 
       <Route path="Register" element={<Register/>} />
 
-
       <Route path="MisTurnos" element={
         <ProtectedRoute>
           <MisTurnos/>
         </ProtectedRoute>
-        } />
-    
-
+      } />
     
       <Route path="CrearTurno" element={
         <ProtectedRoute>
-        <CrearTurno/>
+          <CrearTurno/>
         </ProtectedRoute>
-        } />
+      } />
     
-
      </Routes>
      
      <Footer/>

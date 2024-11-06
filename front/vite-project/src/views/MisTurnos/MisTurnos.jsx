@@ -3,45 +3,39 @@ import Turno from "../../components/Turno/Turno";
 import styles from "./MisTurnos.module.css";
 import axios from "axios";
 import { useUser } from "../../context/UserContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const MisTurnos = () => {
     const navigate = useNavigate(); 
     const { userActive, setUserAppointments, userAppointments } = useUser();
     
-
     useEffect(() => {
         // Verificar si userActive tiene un nombre antes de hacer la solicitud
         if (!userActive.name) {
             navigate("/"); // Navegar a la página principal si no hay usuario activo
             return; // Salir del useEffect
         }
-        //!ver si es necesario esta validacion, creo que no
+
         const fetchData = async () => {
             try {
                 const response = await axios.get(`http://localhost:3000/users/${userActive.id}`);
-                setUserAppointments(response.data.appointments); // Asumiendo que los datos de citas están en response.data.appointments
+                setUserAppointments(response.data.appointments); 
             } catch (error) {
                 console.log(`Detalles del error: ${error}`);
             }
         };
 
         fetchData();
-    }, [ userActive, setUserAppointments, navigate]); // Asegúrate de que navigate esté en las dependencias
-
-
-
-
-
+    }, [ userActive, setUserAppointments, navigate]); 
 
     const handleCancelApp = async (id) => {
         try {
             await axios.put(`http://localhost:3000/appointments/cancel/${id}`);
 
-            // Actualiza la lista de citas en el estado global
+            // Actualiza la lista de turnos en el estado global
             const newAppointments = userAppointments.map(appointment => {
                 if (appointment.id === id) {
-                    return { ...appointment, status: 'cancelado' }; // O puedes eliminarlo si lo prefieres
+                    return { ...appointment, status: 'cancelado' }; 
                 }
                 return appointment;
             });
@@ -53,16 +47,10 @@ const MisTurnos = () => {
         }
     };
 
-
-
-
-
-
-
     return (
         <div className={`${styles.container} ${userAppointments.length === 0 ? styles.noAppointments : ""}`}>
             {userAppointments.length === 0 ? (
-                <p className={styles.mensaje}>No hay turnos registrados.</p>
+                <p className={styles.mensaje}>Aún no tienes turnos registrados. Para crear un nuevo turno has clic <Link to={"/CrearTurno"}> acá </Link> </p>
             ) : (
                 userAppointments.map((appointment) => (
                     <Turno

@@ -2,7 +2,6 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 import { AppointmentStatus } from "../enums/AppointmentStatus"
 import { User } from "./User"
 
-
 @Entity({
     name: "appointments"
 })

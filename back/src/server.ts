@@ -11,6 +11,7 @@ server.use(cors());
 //Cualquier cliente puede realizar peticiones al backend
 
 server.use(express.json());
+
 //server.use(morgan("dev"))
 
 server.use(router);

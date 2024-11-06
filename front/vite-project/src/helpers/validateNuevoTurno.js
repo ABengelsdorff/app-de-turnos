@@ -1,7 +1,7 @@
 export const validateNuevoTurno = (appointmentData) => {
     const errors = {};
     const required = "Campo obligatorio";
-
+    
     // Función para verificar si la fecha es un día de semana (lunes a viernes)
     const isWeekDay = (dateString) => {
         const date = new Date(dateString);
@@ -15,21 +15,19 @@ export const validateNuevoTurno = (appointmentData) => {
         return hour >= 8 && (hour < 20 || (hour === 20 && minutes === 0));
     };
 
-   // Validación de la fecha
-if (!appointmentData.date) {
-    errors.date = required;
-} else {
-    const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 1); // Sumamos un día a la fecha actual
-    const tomorrow = currentDate.toISOString().split("T")[0]; // Fecha de mañana
-
-    if (appointmentData.date < tomorrow) {
-        errors.date = "La fecha debe ser a partir de mañana.";
-    } else if (!isWeekDay(appointmentData.date)) {
-        errors.date = "La fecha no puede ser un sábado o domingo.";
+    // Validación de la fecha
+    if (!appointmentData.date) {
+        errors.date = required;
+    } else {
+        const currentDate = new Date();
+        currentDate.setDate(currentDate.getDate()); 
+        const tomorrow = currentDate.toISOString().split("T")[0]; // Fecha de mañana
+        if (appointmentData.date < tomorrow) {
+            errors.date = "La fecha debe ser a partir de mañana.";
+        } else if (!isWeekDay(appointmentData.date)) {
+            errors.date = "La fecha no puede ser un sábado o domingo.";
+        }
     }
-}
-
 
     // Validación de la hora usando isValidTime
     if (!appointmentData.time) {

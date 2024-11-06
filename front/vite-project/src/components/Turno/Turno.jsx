@@ -7,7 +7,7 @@ const Turno = ({ date, time, status, handleCancelApp }) => {
             <h1>Fecha: {date}</h1>
             <h1>Hora: {time}</h1>
             <h1>Estado: {status}</h1>
-            <button onClick={handleCancelApp} disabled={ status=== "cancelado" || (new Date(date) <= new Date())}>cancelar</button>
+            <button onClick={handleCancelApp} disabled={ status=== "cancelado" || (new Date(date) <= new Date())}>Cancelar</button>
 
         </div>
     )
@@ -15,7 +15,7 @@ const Turno = ({ date, time, status, handleCancelApp }) => {
 
 export default Turno
 
-//Componente tonto
+//!Componente tonto
 
 
 

@@ -15,5 +15,4 @@ const UserRepository = AppDataSource.getRepository(User).extend({
     }
 })
 
-
 export default UserRepository

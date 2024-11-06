@@ -2,16 +2,12 @@ import axios from "axios";
 import styles from "./Login.module.css";
 import { useState } from "react";
 import { validateLogin } from "../../helpers/validateLogin";
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
+import { useUser } from "../../context/UserContext";
 
 import estadoInicio from "../../assets/mientrastanto.gif"; // GIF para estado inactivo (opcional)
 import estadoEmail from "../../assets/cuandoescribeel mail.gif"; // GIF cuando se escribe el email
 import estadoContraseña from "../../assets/cuandoponemostrarlacontrasea.gif"; // GIF cuando se escribe la contraseña
-
-import { Link } from "react-router-dom";
-import { useUser } from "../../context/UserContext";
-
-
 
 const Login = () => {
     const { setUserActive } = useUser();
@@ -21,14 +17,11 @@ const Login = () => {
         password: "",
     });
 
-
-
     const [errors, setErrors] = useState({}) //Guarda los mensajes de error para cada campo del formulario.
 
     const [ touched, setTouched ] = useState({}) // Lleva registro de los campos que han sido tocados o enfocados, para mostrar errores solo cuando el usuario ha interactuado con ellos.
    
     const navigate = useNavigate(); 
-
 
     const handleInputChange = (event) => {
         const { name, value } = event.target; //desestructuro name y value de event.target
@@ -39,7 +32,6 @@ const Login = () => {
             }) 
             setErrors (validateLogin({...userData, [name]: value}))
     };
-
 
     const handleBlur = (event) => {
 
@@ -52,7 +44,6 @@ const Login = () => {
         setErrors(validateLogin(userData))
     }
 
-
     const resetForm = () => {
         setUserData ({
             username: "",
@@ -63,8 +54,6 @@ const Login = () => {
         setTouched({});
     }
 
-
-
     const submitLogin = async (event) => {
         event.preventDefault();
         try {
@@ -73,8 +62,6 @@ const Login = () => {
 
                 localStorage.setItem("userID", loggedUser.data.user.id)
 
-
-
                resetForm()
                 
                 alert("Usuario logeado correctamente");
@@ -82,7 +69,6 @@ const Login = () => {
                 setUserActive(loggedUser.data.user)
 
                 navigate("/MisTurnos");
-
 
             }else(alert("Errores en el formulario"))
            
@@ -93,7 +79,6 @@ const Login = () => {
         }
     };
 
-
     let characterGif = estadoInicio; // Estado por defecto
     if (userData.username) {
       characterGif = estadoEmail; // Cuando se escribe un email
@@ -102,17 +87,15 @@ const Login = () => {
       characterGif = estadoContraseña; // Dependiendo del estado de la contraseña
     }
 
-
-
     return (
         <div className={styles.container}>
             <form onSubmit={submitLogin} className={styles.form}>
                 
-            <img
-          src={characterGif}
-          alt="Character animation"
-          className={styles.character}
-        />
+                <img
+                    src={characterGif}
+                    alt="Character animation"
+                    className={styles.character}
+                />
                 
                 <h2>LOGIN</h2>
 
@@ -125,7 +108,7 @@ const Login = () => {
                         onChange={handleInputChange}
                         onBlur={handleBlur}
                     />
-                    {touched.username && errors.username && <p>{errors.username}</p>}
+                        {touched.username && errors.username && <p>{errors.username}</p>}
                 </div>
 
                 <div>
@@ -137,7 +120,7 @@ const Login = () => {
                         onChange={handleInputChange}
                         onBlur={handleBlur}
                     />
-                    {touched.password && errors.password && <p>{errors.password}</p>} 
+                        {touched.password && errors.password && <p>{errors.password}</p>} 
 
                 </div>
 

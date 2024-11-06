@@ -7,8 +7,6 @@ export const UserContext = createContext({
     setUserAppointments: () => {} //Estado inicial
 })
 
-
-
 export const UserProvider = ({children}) => {
 
     const [userActive, setUserActive] = useState([])

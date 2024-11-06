@@ -4,7 +4,6 @@ export const validateLogin = (userData)  => {
 
     const required = "Campo obligatorio"
 
-
     if(!userData.username){
         errors.username = required
     }else if (userData.username.length < 3){
